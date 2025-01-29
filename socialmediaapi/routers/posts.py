@@ -4,7 +4,7 @@ from socialmediaapi.models.post import UserPost, UserPostIn, CommentIn, Comment,
 
 router = APIRouter()
 post_table = {}
-comment_table = {}
+comments_table = {}
 
 
 def find_post(post_id: int):
@@ -31,16 +31,16 @@ async def create_comment(comment: CommentIn):
     if not post:
         raise HTTPException(status_code=404, detail="Post not found")
     data = comment.model_dump()
-    last_record_id = len(comment_table)
+    last_record_id = len(comments_table)
     new_comment = {**data, "id": last_record_id}
-    comment_table[last_record_id] = new_comment
+    comments_table[last_record_id] = new_comment
     return new_comment
 
 
 @router.get("/post/{post_id}/comment", response_model=list[Comment])
 async def get_comments_on_post(post_id: int):
     return [
-        comment for comment in comment_table.values() if comment["post_id"] == post_id
+        comment for comment in comments_table.values() if comment["post_id"] == post_id
     ]
 
 
