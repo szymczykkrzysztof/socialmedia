@@ -1,17 +1,29 @@
 # Test your FastAPI endpoints
 
-GET http://127.0.0.1:8000/
+GET http://127.0.0.1:8000/post/0
 Accept: application/json
 
 ###
 
 GET http://127.0.0.1:8000/post
 Accept: application/json
+###
 
+GET http://127.0.0.1:8000/post/0/comment
+Accept: application/json
 ###
 POST http://127.0.0.1:8000/post
 Content-Type: application/json
 
 {
-  "body": "Dupa Mariana"
+  "body": "Sample post"
+}
+
+###
+POST http://127.0.0.1:8000/comment
+Content-Type: application/json
+
+{
+  "body": "Sample post",
+  "post_id": 0
 }
