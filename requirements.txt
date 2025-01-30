@@ -3,3 +3,8 @@ uvicorn[standard]
 pytest
 httpx
 pydantic
+sqlalchemy
+databases[aiosqlite]
+databases[asyncpg]
+python-dotenv
+pydantic-settings

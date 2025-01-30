@@ -1,10 +1,13 @@
+import os
 from typing import AsyncGenerator, Generator
 
 import pytest
 from fastapi.testclient import TestClient
 from httpx import AsyncClient, ASGITransport
-from socialmediaapi.main import app
-from socialmediaapi.routers.posts import comments_table, post_table
+
+os.environ["ENV_STATE"] = "test"
+from socialmediaapi.database import database  # noqa:E402
+from socialmediaapi.main import app  # noqa:E402
 
 
 @pytest.fixture(scope="session")
@@ -19,9 +22,9 @@ def client() -> Generator:
 
 @pytest.fixture(autouse=True)
 async def db() -> AsyncGenerator:
-    post_table.clear()
-    comments_table.clear()
+    await database.connect()
     yield
+    await database.disconnect()
 
 
 @pytest.fixture()
