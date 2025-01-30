@@ -17,7 +17,7 @@ comment_table = sqlalchemy.Table(
     sqlalchemy.Column("body", sqlalchemy.String),
     sqlalchemy.Column("post_id", sqlalchemy.ForeignKey("posts.id"), nullable=False),
 )
-
-engine = sqlalchemy.create_engine(config.DATABASE_URL, connect_args={"check_same_thread": False})
+connect_args = {"check_same_thread": False} if "sqlite" in config.DATABASE_URL else {}
+engine = sqlalchemy.create_engine(config.DATABASE_URL, connect_args=connect_args)
 metadata.create_all(engine)
-database = databases.Database(config.DATABASE_URL, force_rollback=config.DB_FORCE_ROLL_BACK)
+database = databases.Database(config.DATABASE_URL, force_rollback=config.DB_FORCE_ROLL_BACK, min_size=1, max_size=3)

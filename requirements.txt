@@ -4,6 +4,7 @@ pytest
 httpx
 pydantic
 sqlalchemy
+psycopg2
 databases[aiosqlite]
 databases[asyncpg]
 python-dotenv
