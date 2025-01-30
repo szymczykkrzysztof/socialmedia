@@ -31,7 +31,6 @@ class TestConfig(GlobalConfig):
 @lru_cache()
 def get_config(env_state: str):
     configs = {"dev": DevConfig, "prod": ProdConfig, "test": TestConfig}
-    print(configs[env_state]())
     return configs[env_state]()
 
 
