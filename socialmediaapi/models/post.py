@@ -1,4 +1,3 @@
-from isort import Config
 from pydantic import BaseModel, ConfigDict
 
 
