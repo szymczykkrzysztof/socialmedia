@@ -70,7 +70,7 @@ def configure_logging() -> None:
                 "level": "DEBUG",
                 "formatter": "console",
                 "filters": ["correlation_id", "email_obfuscation"],
-                "source_token": "VS6aX5FrXVNVaW23LpW6HkNY",
+                "source_token": config.LOGTAIL_API_KEY,
             }
         },
         'loggers': {
